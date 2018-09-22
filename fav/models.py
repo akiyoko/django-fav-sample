@@ -1,0 +1,22 @@
+from django.conf import settings
+from django.db import models
+from django.utils import timezone
+
+
+def get_favorite_image_path(instance, filename):
+    return 'images/fav/{0}/{1}'.format(instance.submitter.id, filename)
+
+
+class Favorite(models.Model):
+    """ファボ"""
+
+    class Meta:
+        db_table = 'favorite'
+
+    title = models.CharField('タイトル', max_length=254)
+    comment = models.TextField('コメント', blank=True, null=True)
+    image = models.ImageField('フォト', blank=True, null=True,
+                              upload_to=get_favorite_image_path)
+    submitter = models.ForeignKey(settings.AUTH_USER_MODEL, models.PROTECT,
+                                  verbose_name='投稿者')
+    created_at = models.DateTimeField('作成日時', default=timezone.now)

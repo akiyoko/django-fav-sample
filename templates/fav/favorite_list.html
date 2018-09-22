@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}ファボ一覧{% endblock %}
+
+{% block content %}
+<h1>ファボ一覧</h1>
+<div class="row my-3">
+    <div class="card-deck">
+        {% for object in object_list %}
+            <div class="card">
+                {% if object.image %}
+                    <img class="card-img-top" src="{{ object.image.url }}">
+                {% else %}
+                    <img class="card-img-top" src="{% static 'fav/images/no-image.png' %}">
+                {% endif %}
+                <div class="card-body">
+                    <p class="card-title"><a href="{% url 'fav:update' object.pk %}">{{ object.title }}</a></p>
+                    <p class="card-text">{{ object.comment|linebreaksbr }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ object.created_at|naturaltime }}</small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="row my-3">
+    <a class="btn btn-lg btn-primary" href="{% url 'fav:create' %}" role="button">ファボ登録</a>
+</div>
+{% endblock %}
