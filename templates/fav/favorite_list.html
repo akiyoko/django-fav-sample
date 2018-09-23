@@ -6,12 +6,12 @@
 
 {% block content %}
 <h1>ファボ一覧</h1>
-<div class="row my-3">
-    <div class="card-deck">
+<div class="row my-4">
+    <div class="card-columns">
         {% for object in object_list %}
             <div class="card">
-                {% if object.image %}
-                    <img class="card-img-top" src="{{ object.image.url }}">
+                {% if object.photo %}
+                    <img class="card-img-top" src="{{ object.photo.url }}">
                 {% else %}
                     <img class="card-img-top" src="{% static 'fav/images/no-image.png' %}">
                 {% endif %}
@@ -23,10 +23,13 @@
                     <small class="text-muted">{{ object.created_at|naturaltime }}</small>
                 </div>
             </div>
+            {#{% if forloop.counter|divisibleby:"4" %}#}
+            {#<div class="w-100"></div>#}
+            {#{% endif %}#}
         {% endfor %}
     </div>
 </div>
-<div class="row my-3">
+<div class="row my-4">
     <a class="btn btn-lg btn-primary" href="{% url 'fav:create' %}" role="button">ファボ登録</a>
 </div>
 {% endblock %}

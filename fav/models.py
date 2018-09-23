@@ -13,9 +13,9 @@ class Favorite(models.Model):
     class Meta:
         db_table = 'favorite'
 
-    title = models.CharField('タイトル', max_length=254)
-    comment = models.TextField('コメント', blank=True, null=True)
-    image = models.ImageField('フォト', blank=True, null=True,
+    title = models.CharField(verbose_name='タイトル', max_length=254)
+    comment = models.TextField(verbose_name='コメント', blank=True, null=True)
+    photo = models.ImageField(verbose_name='フォト', blank=True, null=True,
                               upload_to=get_favorite_image_path)
     submitter = models.ForeignKey(settings.AUTH_USER_MODEL, models.PROTECT,
                                   verbose_name='投稿者')

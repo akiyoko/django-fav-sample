@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}ファボ登録{% endblock %}
+{% block title %}ファボ投稿{% endblock %}
 
 {% block content %}
-<h1>ファボを登録しよう</h1>
+<h1>ファボを投稿しよう</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
